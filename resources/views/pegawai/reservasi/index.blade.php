@@ -18,30 +18,29 @@
                          <th scope="col">Nama Pelanggan</th>
                          <th scope="col">Restoran</th>
                          <th scope="col">Tanggal Reservasi</th>
-                         <th scope="col">Nama Pegawai</th>
                          <th scope="col">Nomor Meja</th>
                          <th scope="col">Status</th>
                          <th scope="col">Tanggal Pembaruan</th>
                          <th scope="col">Aksi</th>
                      </tr>
                  </thead>
-                 {{-- <tbody>
+                 <tbody>
                      @foreach($reservasi as $reservasi)
                      <tr>
-                         <td>{{$reservasi->id_reservasi}}</td>
-                         <td>{{$reservasi->nama_pelanggan}}</td>
-                         <td>{{$reservasi->nama_restoran}}</td>
+                         <td>{{$loop->iteration}}</td>
+                         <td>{{$reservasi->user->name}}</td>
+                         <td>{{$reservasi->restoran->nama_restoran}}</td>
                          <td>{{$reservasi->created_at}}</td>
-                         <td>{{$reservasi->nama_pegawai}}</td>
+                         {{-- <td>{{$reservasi->nama_pegawai}}</td> --}}
                          <td>{{$reservasi->no_meja_reservasi}}</td>
                          <td>{{$reservasi->status_reservasi}}</td>
                          <td>{{$reservasi->updated_at}}</td>
                          <td>
-                             <a href="{{URL('pegawai/reservasi/'.$reservasi->id_reservasi.'/edit')}}" class="btn btn-primary">
+                             <a href="{{URL('reservasi/'.$reservasi->id.'/edit')}}" class="btn btn-primary">
                                  <i class="fa fa-pencil"></i>
                              </a>
 
-                             <form action="{{URL('pegawai/reservasi/'.$reservasi->id_reservasi)}}" method="POST" onsubmit="sweetconfirm()">
+                             <form action="{{URL('reservasi/'.$reservasi->id)}}" method="POST" onsubmit="sweetconfirm()">
                                  {{ csrf_field() }}
                                  {{ method_field('DELETE')}}
                                  <button class="btn btn-danger" type="submit">
@@ -51,7 +50,7 @@
                          </td>
                      </tr>
                      @endforeach
-                 </tbody> --}}
+                 </tbody>
             </table>
         </div>
     </div>

@@ -5,7 +5,7 @@
 @section('content')
     <link href=" {{ asset('ela/css/lib/sweetalert/sweetalert.css') }}" rel="stylesheet">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card bg-primary p-20">
                 <div class="media widget-ten">
                     <div class="media-left meida media-middle">
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="card bg-pink p-20">
                 <div class="media widget-ten">
                     <div class="media-left meida media-middle">
@@ -30,8 +30,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
+        </div> --}}
+        <div class="col-md-4">
             <div class="card bg-success p-20">
                 <div class="media widget-ten">
                     <div class="media-left meida media-middle">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card bg-danger p-20">
                 <div class="media widget-ten">
                     <div class="media-left meida media-middle">
@@ -60,7 +60,7 @@
     </div>
     <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-title">
                     <h4>Reservasi</h4>
@@ -71,25 +71,22 @@
                             <thead>
                                 <tr>
                                     <th>Pelanggan</th>
-                                    <th>Pegawai</th>
+                                    {{-- <th>Pegawai</th> --}}
                                     <th>Tanggal Reservasi</th>
                                     <th>Status</th>
+                                    <th>Tanggal Pembaruan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 @foreach($reservasi as $reservasi)
                                 <tr>
-                                    <td>
-                                        <div class="round-img">
-                                            <a href=""><img src="{{asset('images/profil')}}/{{$reservasi['foto_pelanggan']}}" title="{{$reservasi['nama_pelanggan']}}"></a>
-                                        </div>
-                                    </td>
-                                    <td>
+                                    {{-- <td>
                                         <div class="round-img">
                                             <a href=""><img src="{{asset('images/profil')}}/{{$reservasi['foto_pegawai']}}" title="{{$reservasi['nama_pegawai']}}"></a>
                                         </div>
-                                    </td>
+                                    </td> --}}
+                                    <td>{{$reservasi->user->name}}</td>
                                     <td><span>{{$reservasi['created_at']}}</span></td>
                                     <td>
                                         @if($reservasi['status_reservasi']=='Menunggu Konfirmasi')
@@ -98,6 +95,8 @@
                                         <span class="badge badge-success">
                                         @elseif($reservasi['status_reservasi']=='Selesai')
                                         <span class="badge badge-primary">
+                                        @elseif($reservasi['status_reservasi']=='Sedang Berlangsung')
+                                        <span class="badge badge-secondary">
                                         @elseif($reservasi['status_reservasi']=='Batal')
                                         <span class="badge badge-danger">
                                         @else
@@ -108,13 +107,13 @@
                                     </td>
                                     <td><span>{{$reservasi['updated_at']}}</span></td>
                                     <td>
-                                        <a href="{{URL('pegawai/pemesanan/'.$reservasi->id_pemesanan.'/edit')}}" class="btn btn-primary">
+                                        <a href="{{URL('reservasi/'.$reservasi->id.'/edit')}}" class="btn btn-primary">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                     <a href="" class="btn btn-primary">Selengkapnya</a>
@@ -122,7 +121,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
+        {{-- <div class="col-lg-6">
             <div class="card">
                 <div class="card-title">
                     <h4>Recent Orders </h4>
@@ -139,7 +138,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 @foreach($pesanan as $pesanan)
                                 <tr>
                                     <td>
@@ -147,14 +146,10 @@
                                             <a href=""><img src="{{asset('images/profil')}}/{{$pesanan['foto_pelanggan']}}" title="{{$pesanan['nama_pelanggan']}}"></a>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="round-img">
-                                            <a href=""><img src="{{asset('images/profil')}}/{{$pesanan['foto_pegawai']}}" title="{{$pesanan['nama_pegawai']}}"></a>
-                                        </div>
-                                    </td>
+                                    <td>{{$pesanan->user->name}}</td>
                                     <td><span>{{$pesanan['created_at']}}</span></td>
                                     <td>
-                                        @if($pesanan['status_pemesanan']=='Belum Dibayar')
+                                        @if($pesanan['status_pemesanan']=='Belum Lunas')
                                         <span class="badge badge-danger">
                                         @elseif($pesanan['status_pemesanan']=='Lunas')
                                         <span class="badge badge-success">
@@ -165,24 +160,24 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{URL('pegawai/pemesanan/'.$pesanan->id_pemesanan.'/edit')}}" class="btn btn-primary">
+                                        <a href="{{URL('pemesanan/'.$pesanan->id.'/edit')}}" class="btn btn-primary">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>
                                 @endforeach
-                            </tbody> --}}
+                            </tbody>
                         </table>
                     </div>
                     <a href="" class="btn btn-primary">Selengkapnya</a>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 <script src="{{ asset('ela/js/lib/sweetalert/sweetalert.min.js') }}"></script>
 <!-- scripit init-->
 <script type="text/javascript">
-    swal("Hey", "Selamat datang di dashboard Dream Restaurant", "success")
+    swal("Hey Sahabat", "Selamat datang di dashboard Dream Restaurant", "success")
 </script>
 @endsection

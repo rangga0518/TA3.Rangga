@@ -5,7 +5,7 @@
 
 
 @section('content')
-                    <a href="{{URL('pelanggan/pemesanan/create')}}" class="btn btn-success">Pesan</a>
+                    <a href="{{URL('pemesanans/create')}}" class="btn btn-success">Pesan</a>
 
                     <div class="card" style="background: #f5f5f5">
                         <div class="card-body">
@@ -16,29 +16,27 @@
                                             <th scope="col">ID Pemesanan</th>
                                             <th scope="col">Restoran</th>
                                             <th scope="col">Tanggal Pemesanan</th>
-                                            <th scope="col">Nama Pegawai</th>
                                             <th scope="col">Total Pemesanan</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
-                                    {{-- <tbody>
+                                    <tbody>
                                         @foreach($pemesanan as $pemesanan)
                                         <tr>
-                                            <td>{{$pemesanan->id_pemesanan}}</td>
-                                            <td>{{$pemesanan->nama_restoran}}</td>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$pemesanan->restoran->nama_restoran}}</td>
                                             <td>{{$pemesanan->created_at}}</td>
-                                            <td>{{$pemesanan->nama_pegawai}}</td>
-                                            <td>{{$pemesanan->total_pemesanan}}</td>
+                                            <td>Rp {{ number_format($pemesanan->hidangan->harga_hidangan * $pemesanan->jumlah_pesanan) }}</td>
                                             <td>{{$pemesanan->status_pemesanan}}</td>
                                             <td>
-                                                <a href="{{URL('pelanggan/pemesanan/'.$pemesanan->id_pemesanan)}}" class="btn btn-primary">
+                                                <a href="{{URL('pemesanans/'.$pemesanan->id)}}" class="btn btn-primary">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
                                         @endforeach
-                                    </tbody> --}}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

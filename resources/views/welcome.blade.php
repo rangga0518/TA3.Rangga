@@ -17,22 +17,15 @@
     <link href="{{ asset('ela/css/helper.css') }}" rel="stylesheet">
     <link href="{{ asset('resto/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('ela/css/style.css') }}" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
-    <!-- IF LOFIN -->
-    {{-- @if($islogin['login']=='pelanggan')
-    <link href=" {{ asset('ela/css/lib/toastr/toastr.min.css') }}" rel="stylesheet">
-    @elseif($islogin['login']=='pegawai')
-    <link href=" {{ asset('ela/css/lib/toastr/toastr.min.css') }}" rel="stylesheet">
-    @else --}}
-    <!-- Kosong in lah -->
-    {{-- @endif --}}
-
+    <!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/flaticon.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/animate.css"/>
+    
     <style type="text/css">
         @media (min-width: 1024px){
             .page-wrapper {
@@ -67,10 +60,12 @@
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                     <div class="container">
+                        @foreach ($restoran as $restoran)
                       <div class="carousel-caption fadeInUp animated" style="bottom:0;top:200px">
-                        <h2 class="display-1" style="color:#fff;">Dream Restaurant</h2>
+                        <h2 class="display-1" style="color:#fff;">{{$restoran->nama_restoran}}</h2>
                         <p class="h2" style="color: #ddd;padding-top:20px;padding-bottom: 20px">A Restaurant </p>
                       </div>
+                      @endforeach
                     </div>
                     <div class="carousel-item active" style="height: 100vh">
                       <img style="filter: brightness(40%); width:100%;" class="first-slide" src="resto/images/dinner1.jpg" alt="First slide">
@@ -96,7 +91,7 @@
                         <b><img src="{{asset('images/logo.png')}}" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="{{asset('images/')}}" alt="Dream Restaurant" class="dark-logo" /></span>
+                        <span class="dark-logo">Dream Restaurant</span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -129,27 +124,6 @@
                         </li>
                         {{-- @endif --}}
                     </ul>
-                    <!-- User profile and search -->
-                    {{-- <ul class="navbar-nav my-lg-0">
-                        <!-- Profile -->
-                        <li class="nav-item dropdown">
-
-                            @if($islogin['login']=='pelanggan')
-                            <a class="nav-link dropdown-toggle text-muted " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/profil')}}/{{$pelanggan['foto_pelanggan']}}" style="width:30px;height:30px;border-radius: 50%"></a>
-                            @elseif($islogin['login']=='pegawai')
-                            <a class="nav-link dropdown-toggle text-muted " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/profil')}}/{{$pegawai['foto_pegawai']}}" style="width:30px;height:30px;border-radius: 50%"></a>
-                            @endif
-
-                            
-                            <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                                <ul class="dropdown-user">
-                                    <li><a href="@if($islogin['login']=='pelanggan'){{URL('pelanggan')}}@elseif($islogin['login']=='pegawai'){{URL('pegawai')}}@endif"><i class="fa fa-tachometer"></i> Dashboard</a></li>
-                                    <li><a href="@if($islogin['login']=='pelanggan'){{URL('pelanggan/pengaturan')}}@elseif($islogin['login']=='pegawai'){{URL('pegawai/pengaturan')}}@endif"><i class="ti-user"></i> Profile</a></li>
-                                    <li><a href="@if($islogin['login']=='pelanggan'){{URL('pelanggan/logout')}}@elseif($islogin['login']=='pegawai'){{URL('pegawai/logout')}}@endif"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul> --}}
                 </div>
             </nav>
         </div>
@@ -159,15 +133,50 @@
               <div class="col-md-6">
                 <img class="img-fluid" src="{{ asset('resto/images/dinner1.jpg')}}">
               </div>
+              @foreach ($about as $about)
               <div class="col-md-6" style="padding:30px 50px;">
-                <h2 class="display-4" style="color:#fff;padding-bottom: 10px;padding-top: 20px">About</h2>
-                <p class="lead" style="color:#a99c92;font-weight: 300">Dream Restaurant, Restoran dengan gaya khas Western yang sangat cocok untuk berbagai acara dan kebutuhan. Dikenal sejak tahun 1867, Kami menggunakan bahan - bahan yang berkualitas dan dipilah secara baik dari sumbernya sehingga menghasilkan hasil masakan yang lezat dan berkualitas. Dream Restaurant menyediakan tempat untuk anda yang ingin berbagi momen bersama orang - orang disekitar anda melalui makanan yang kami sediakan, mari pesan tempat anda sekarang.</p>
+                <h2 class="display-4" style="color:#fff;padding-bottom: 10px;padding-top: 20px">{{$about->nama_about}}</h2>
+                <p class="lead" style="color:#a99c92;font-weight: 300">{{$about->text_about}}</p>
               </div>
+              @endforeach
             </div>
         </div>
-
+        <section class="services-section spad">
+            <div class="container">
+                <div class="section-title">
+                    <i class="flaticon-022-tray"></i>
+                    <h2>Our Services</h2>
+                </div>
+                <div class="row services">
+                    <div class="col-lg-3 col-md-6 service-item">
+                        <i class="flaticon-005-coffee-1"></i>
+                        <h3>Breakfast</h3>
+                        <p>In vitae nisi aliquam, scelerisque leo a, volutpat sem. Vivamus rutrum dui fermentum.</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 service-item">
+                        <i class="flaticon-016-pancake"></i>
+                        <h3>Brunch</h3>
+                        <p>Scelerisque leo a, volutpat sem. Vivamus rutrum dui fermentum eros hendrerit, id lobortis.</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 service-item">
+                        <i class="flaticon-008-soup"></i>
+                        <h3>Lunch</h3>
+                        <p>In vitae nisi aliquam, scelerisque leo a, volutpat sem. Vivamus rutrum dui fermentum.</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 service-item">
+                        <i class="flaticon-032-hamburger"></i>
+                        <h3>Dinner</h3>
+                        <p>Aliquam, scelerisque leo a, volutpat sem. Vivamus rutrum dui fermentum eros hendreri.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div id="kata" class="row">
             <div class="col-12">
+                <div class="section-title">
+                    <i class="flaticon-020-ice-cream"></i>
+                    <h2>Testimonials</h2>
+                </div>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                   <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -177,12 +186,16 @@
                   <div class="carousel-inner">
                     <div class="carousel-item active" style="height: 300px">
                       <div class="container">
+                          @foreach ($coment as $coment)
                         <div class="carousel-caption">
-                          <h3 class="display-4" style="color:#5e493a;font-size: 40px ;">"Makan adalah hobiku. Dream Restaurant mengirim hobiku ke tingkatan selanjutnya."</h3>
+                          <h3 class="display-4" style="color:#5e493a;font-size: 40px ;">{!!$coment->description!!}</h3>
+                          {{-- "Makan adalah hobiku. Dream Restaurant mengirim hobiku ke tingkatan selanjutnya." --}}
+                          {{-- <p class="h4" style="color: gray; padding-top:20px;padding-bottom: 20px">{{$coment->user}}</p> --}}
                         </div>
+                        @endforeach
                       </div>
                     </div>
-                    <div class="carousel-item" style="height: 300px">
+                    {{-- <div class="carousel-item" style="height: 300px">
                       <div class="container">
                         <div class="carousel-caption">
                           <h3 class="display-1" style="color:#5e493a;font-size: 40px ;">"Pelayanannya ramah, tempatnya bersih, mantap deh pokoknya."</h3>
@@ -199,7 +212,7 @@
                   </div>
                 </div>
             </div>                
-        </div>
+        </div> --}}
 
         <div id="hidangan" style="background-image:url({{ asset('resto/images/wood_1.png')}});">
             <div class="row">
@@ -211,11 +224,11 @@
                             <?php
                                 $i = 1;
                             ?>
-                            {{-- @foreach($hidangan as $hidangan)
+                            @foreach($hidangan as $hidangan)
                             <div class="col-md-6">
                                 <div class="row">
 
-                                    <div class="col-md-6" style="height: 200px;background-image: url({{ asset('images/hidangan/'.$hidangan->foto_hidangan) }})">
+                                    <div class="col-md-6" style="height: 200px;"><img src="{{Storage::url($hidangan->foto_hidangan)}}" alt="{{$hidangan->nama_hidangan}}" class="img-responsive" max-width="200" max-height="200">
                                     </div>
                                     <div class="col-md-6" style="background: @if($i==1||$i==4||$i==5) #f5f5f5 @else #faebcd @endif
                                     ;padding: 30px 20px">
@@ -224,20 +237,91 @@
                                         <p class="display-4" style="margin-top:30px;font-size: 40px; text-align: center;color: #5e493a">IDR {{$hidangan->harga_hidangan}}</p>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <?php
                                 $i+=1;
                             ?>
-                            {{-- @endforeach --}}
+                            @endforeach
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <!-- Start team Area -->
+			{{-- <section class="team-area section-gap" id="chefs">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Meet Our Qualified Chefs</h1>
+								<p>Who are in extremely love with eco friendly system.</p>
+							</div>
+						</div>
+					</div>						
+					<div class="row justify-content-center d-flex align-items-center">
+						<div class="col-md-3 single-team">
+						    <div class="thumb">
+						        <img class="img-fluid" src="img/t1.jpg" alt="">
+						        <div class="align-items-center justify-content-center d-flex">
+									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+						        </div>
+						    </div>
+						    <div class="meta-text mt-30 text-center">
+							    <h4>Ethel Davis</h4>
+							    <p>Managing Director (Sales)</p>									    	
+						    </div>
+						</div>
+						<div class="col-md-3 single-team">
+						    <div class="thumb">
+						        <img class="img-fluid" src="img/t2.jpg" alt="">
+						        <div class="align-items-center justify-content-center d-flex">
+									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+						        </div>
+						    </div>
+						    <div class="meta-text mt-30 text-center">
+							    <h4>Rodney Cooper</h4>
+							    <p>Creative Art Director (Project)</p>			    	
+						    </div>
+						</div>	
+						<div class="col-md-3 single-team">
+						    <div class="thumb">
+						        <img class="img-fluid" src="img/t3.jpg" alt="">
+						        <div class="align-items-center justify-content-center d-flex">
+									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+						        </div>
+						    </div>
+						    <div class="meta-text mt-30 text-center">
+							    <h4>Dora Walker</h4>
+							    <p>Senior Core Developer</p>			    	
+						    </div>
+						</div>	
+						<div class="col-md-3 single-team">
+						    <div class="thumb">
+						        <img class="img-fluid" src="img/t4.jpg" alt="">
+						        <div class="align-items-center justify-content-center d-flex">
+									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+						        </div>
+						    </div>
+						    <div class="meta-text mt-30 text-center">
+							    <h4>Lena Keller</h4>
+							    <p>Creative Content Developer</p>			    	
+						    </div>
+						</div>																		
+					</div>
+				</div>	
+			</section> --}}
+			<!-- End team Area -->
         <div id="reservasi" class="container">
             <h2 class="display-4" style="text-align: center;color:#5e493a;padding:50px 0;">Reservasi</h2>
 
@@ -245,15 +329,20 @@
                 <div class="col-md-6">
                     <h3 class="display-4" style="font-size: 30px;margin-bottom: 30px">Contact Info</h3>
                     <ul>
+                        {{-- @foreach ($restoran as $restoran) --}}
                         <li style="padding-left: 50px;margin-bottom: 10px">
                             <i class="icon-home" style="position: absolute;left: 20px"></i>
-                            Jalan Raya Batu Belig no. 17X, <br> Seminyak, Bali
-                        </li>
+                            {{$restoran->alamat_restoran}}
+                            {{-- Jalan Raya Raden Saleh no. 17X, <br> Karang Tengah, Kota Tangerang --}}
+                        </li>    
+                        {{-- @endforeach --}}
+                        
                         <li style="padding-left: 50px;margin-bottom: 10px"><i class="icon-phone" style="position: absolute;left: 20px"></i> (0361)237-163</li>
                         <li style="padding-left: 50px;margin-bottom: 10px"><i class="icon-envelope" style="position: absolute;left: 20px"></i>Dream@gmail.com</li>
                         <li style="padding-left: 50px;margin-bottom: 10px"><i class="icon-globe" style="position: absolute;left: 20px"></i> <a href="#" target="_blank">Dream.com</a></li>
                     </ul>
                 </div>
+                
                 <div class="col-md-6">
                     <h3 class="display-4" style="font-size: 30px;margin-bottom: 30px">
                         {{-- @if($islogin['login']=='pelanggan'||$islogin['login']=='pegawai')
@@ -262,27 +351,6 @@
                             Sign Up
                         @endif --}}
                     </h3>
-                    {{-- @if($islogin['login']=='pelanggan'||$islogin['login']=='pegawai')
-                        @if($islogin['login']=='pelanggan')
-                            <div class="card">
-                              <img class="card-img-top" src="{{ asset('images/profil/'.$pelanggan['foto_pelanggan']) }}" style="width: 50%">
-                              <div class="card-body">
-                                <h4 class="card-title">{{$pelanggan['nama_pelanggan']}}</h4>
-                                <p class="card-text">{{$pelanggan['email_pelanggan']}} - {{$pelanggan['username_pelanggan']}}</p>
-                                <a href="{{URL('pelanggan/reservasi/create')}}" class="btn btn-primary">Reservasi</a>
-                              </div>
-                            </div>
-                        @else
-                            <div class="card">
-                              <img class="card-img-top" src="{{ asset('images/profil/'.$pegawai['foto_pegawai']) }}" style="width: 50%">
-                              <div class="card-body">
-                                <h4 class="card-title">{{$pegawai['nama_pegawai']}}</h4>
-                                <p class="card-text">{{$pegawai['email_pegawai']}} - {{$pegawai['username_pegawai']}}</p>
-                                <a href="{{URL('pegawai')}}" class="btn btn-primary">Dashboard</a>
-                              </div>
-                            </div>
-                        @endif
-                    @else --}}
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
@@ -386,6 +454,11 @@
         </div>
 
     </div>
+    <div style="position:fixed;left:20px;bottom:20px;">
+        <a href="https://api.whatsapp.com/send?phone=+6281284308954&text=‎">
+        <button style="background:#32C03C;vertical-align:center;height:36px;border-radius:5px">
+        <img src="https://web.whatsapp.com/img/favicon/1x/favicon.png">Booking Pesta</button></a>
+    </div>
     <!-- End Wrapper -->
     <!-- All Jquery -->
     <script src="{{ asset('ela/js/lib/jquery/jquery.min.js') }}"></script>
@@ -415,8 +488,8 @@
     {{-- @if($islogin['login']=='pelanggan'||$islogin['login']=='pegawai') --}}
     <script src="{{ asset('ela/js/lib/toastr/toastr.min.js') }}"></script>
     <!-- scripit init-->
-    {{-- <script type="text/javascript">
-        toastr.success('Kamu login sebagai @if($islogin['login']=='pelanggan') {{$pelanggan['nama_pelanggan']}} @else {{$pegawai['nama_pegawai']}} @endif','Logged In',{
+    <script type="text/javascript">
+        toastr.success('Kamu login sebagai 'Logged In',{
             timeOut: 5000,
             "closeButton": true,
             "debug": false,
@@ -436,7 +509,7 @@
 
         })
     </script>
-    @endif --}}
+    {{-- @endif --}}
 
 </body>
 

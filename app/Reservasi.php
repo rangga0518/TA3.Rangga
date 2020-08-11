@@ -12,4 +12,7 @@ class Reservasi extends Model
     public function restoran(){
         return $this->belongsTo(Restoran::class, 'id_restoran', 'id');
     }
+    public function user(){
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }

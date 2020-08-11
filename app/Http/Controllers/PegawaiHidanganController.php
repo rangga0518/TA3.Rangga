@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Hidangan;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiHidanganController extends Controller
 {
+    public function __construct(){
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,9 @@ class PegawaiHidanganController extends Controller
      */
     public function index()
     {
-        return view('pegawai.hidangan.index');
+        $makanan = Hidangan::where('jenis_hidangan', 'Makanan')->get();
+        $minuman = Hidangan::where('jenis_hidangan', 'Minuman')->get();
+        return view('pegawai.hidangan.index', compact('makanan','minuman'));
     }
 
     /**
@@ -35,7 +41,16 @@ class PegawaiHidanganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateDate = $request->validate([
+            'nama_hidangan' => 'required',
+            'jenis_hidangan' => 'required',
+            'harga_hidangan' => 'required',
+            'foto_hidangan' => 'required'
+            ]);
+            $validateDate['foto_hidangan'] = $request->file('foto_hidangan')->store('asset/hidangan','public');
+            Hidangan::create($validateDate);
+            // $request->session()->flash('pesan', "Data baru berhasil di simpan ");
+            return redirect()->route('hidangan.index');
     }
 
     /**
@@ -55,9 +70,9 @@ class PegawaiHidanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Hidangan $hidangan)
     {
-        //
+        return view('pegawai.hidangan.edit', ['hidangan' => $hidangan]);
     }
 
     /**
@@ -67,9 +82,22 @@ class PegawaiHidanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Hidangan $hidangan)
     {
-        //
+        $validateDate = $request->validate([
+            'nama_hidangan' => 'required',
+            'jenis_hidangan' => 'required',
+            'harga_hidangan' => 'required',
+            'foto_hidangan' => 'image|max:2000',
+            ]);
+        $dataId = $hidangan->find($hidangan->id);
+        $data = $request->all();
+        if($request->foto_hidangan){
+            Storage::delete('public/' .$dataId->foto_hidangan);
+            $data['foto_hidangan'] = $request->file('foto_hidangan')->store('asset/hidangan','public');
+        }
+        $dataId->update($data);
+        return redirect()->route('hidangan.index');
     }
 
     /**
@@ -78,8 +106,10 @@ class PegawaiHidanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Hidangan $hidangan)
     {
-        //
+        Storage::delete('public/'.$hidangan->foto_hidangan);
+        $hidangan->delete();
+        return redirect()->route('hidangan.index')->with('pesan',"Hapus data $hidangan->nama_hidangan Berhasil");
     }
 }

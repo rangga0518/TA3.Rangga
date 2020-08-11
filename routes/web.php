@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'IndexController@index')->name('welcome');
 
 
 
@@ -27,9 +28,10 @@ Route::group(['middleware'=> ['auth']], function(){
     
     Route::get('/pelanggan', 'PelangganController@index');
 
-    Route::resource('pelanggan/reservasi', 'PelangganReservasiController');
-	Route::resource('pelanggan/pemesanan', 'PelangganPemesananController');
-	Route::resource('pelanggan/hidangan', 'PelangganHidanganController');
+    Route::resource('reservasis', 'PelangganReservasiController');
+    Route::resource('pemesanans', 'PelangganPemesananController');
+	Route::resource('hidangans', 'PelangganHidanganController');
+	Route::resource('komentar', 'ComentController');
 });
 
 Route::group(['middleware'=> ['auth']], function(){
@@ -40,6 +42,7 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::resource('pemesanan', 'PegawaiPemesananController');
     Route::resource('restoran', 'PegawaiRestoranController');
 	Route::resource('hidangan', 'PegawaiHidanganController');
+	Route::resource('about', 'AboutController');
 });
 
 

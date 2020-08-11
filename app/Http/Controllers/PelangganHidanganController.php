@@ -14,8 +14,8 @@ class PelangganHidanganController extends Controller
      */
     public function index()
     {
-        $makanan = Hidangan::all();
-        $minuman = Hidangan::all();
+        $makanan = Hidangan::where('jenis_hidangan', 'Makanan')->get();
+        $minuman = Hidangan::where('jenis_hidangan', 'Minuman')->get();
         return view('pelanggan.hidangan.index', compact('makanan','minuman'));
     }
 

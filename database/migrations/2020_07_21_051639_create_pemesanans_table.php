@@ -15,14 +15,16 @@ class CreatePemesanansTable extends Migration
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_restoran')->unsigned();
-            $table->bigInteger('id_user')->unsigned();
-            $table->bigInteger('total_pemesanan');
-            $table->string('status_pemesanan');
+            // $table->bigInteger('id_restoran')->unsigned();
+            // $table->bigInteger('id_user')->unsigned();
+            // $table->bigInteger('id_hidangan')->unsigned();       
+            // $table->bigInteger('jumlah_pesanan');       
+            // $table->string('status_pemesanan');
             $table->timestamps();
 
-            $table->foreign('id_restoran')->references('id')->on('restorans')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_restoran')->references('id')->on('restorans')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_hidangan')->references('id')->on('hidangans')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reservasi;
+use App\Restoran;
+use Illuminate\Support\Facades\Auth;
 
 class PelangganReservasiController extends Controller
 {
@@ -14,7 +16,7 @@ class PelangganReservasiController extends Controller
      */
     public function index()
     {
-        $reservasi = Reservasi::all();
+        $reservasi = Reservasi::where('id_user', Auth::user()->id)->get();
         return view ('pelanggan.reservasi.index',compact('reservasi'));
     }
 
@@ -25,7 +27,9 @@ class PelangganReservasiController extends Controller
      */
     public function create()
     {
-        return view ('pelanggan.reservasi.create');
+        $restoran = Restoran::all();
+        
+        return view ('pelanggan.reservasi.create', compact('restoran'));
     }
 
     /**
@@ -36,7 +40,18 @@ class PelangganReservasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validateDate = $request->validate([
+            'id_restoran' => 'required',
+            
+            ]);
+            Reservasi::create([
+                'id_restoran' => $validateDate['id_restoran'],
+                'id_user' => Auth::user()->id,
+                'no_meja_reservasi' => '',
+                'status_reservasi' => 'Menunggu Konfirmasi'
+            ]);
+            return redirect()->route('reservasis.index');
     }
 
     /**

@@ -13,6 +13,7 @@
     <title>@yield('title') - Dream Restaurant</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('ela/css/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    @yield('ckeditor')
     <!-- Custom CSS -->
     <link href="{{ asset('ela/css/helper.css') }}" rel="stylesheet">
     <link href="{{ asset('ela/css/style.css') }}" rel="stylesheet">
@@ -49,7 +50,7 @@
                         <b><img src="{{asset('images/logo.png')}}" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="{{asset('images/')}}" alt="Dream Restaurant" class="dark-logo" /></span>
+                        <span class="dark-logo">Dream Restaurant</span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -82,28 +83,28 @@
                                         <div class="message-center">
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="{{ asset('ela/images/users/5.jpg') }}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                <div class="user-img" class="img-circle">user <span class="profile-status online pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="{{ asset('ela/images/users/2.jpg') }}" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                                <div class="user-img" class="img-circle"> <span class="profile-status busy pull-right"></span>user </div>
                                                 <div class="mail-contnet">
                                                     <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="{{ asset('ela/images/users/3.jpg') }}" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                                <div class="user-img" class="img-circle"> <span class="profile-status away pull-right"></span> user</div>
                                                 <div class="mail-contnet">
                                                     <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="{{ asset('ela/images/users/4.jpg') }}" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                                <div class="user-img" class="img-circle"> <span class="profile-status offline pull-right"></span>user </div>
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
                                                 </div>
@@ -152,17 +153,17 @@
                         <li class="{{{(Request::is('pelanggan') ? 'active' : '')}}}"> <a href="{{URL('pelanggan')}}" aria-expanded="false"><i class="fa fa-tachometer"></i>Dashboard </a></li>
                         <li class="{{{(Request::is('pelanggan/reservasi') ? 'active' : '')}}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Reservasi</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{URL('pelanggan/reservasi')}}">Semua Reservasi</a></li>
-                                <li><a href="{{URL('pelanggan/reservasi/create')}}">Buat Reservasi</a></li>
+                                <li><a href="{{URL('reservasis')}}">Semua Reservasi</a></li>
+                                <li><a href="{{URL('reservasis/create')}}">Buat Reservasi</a></li>
                             </ul>
                         </li>
-                        <li class="{{{(Request::is('pelanggan/pemesanan') ? 'active' : '')}}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list-ul"></i><span class="hide-menu">Pemesanan</span></a>
+                        <li class="{{{(Request::is('komentar') ? 'active' : '')}}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list-ul"></i><span class="hide-menu">Penilaian</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{URL('pelanggan/pemesanan')}}">Semua Pemesanan</a></li>
-                                <li><a href="{{URL('pelanggan/pemesanan/create')}}">Buat Pemesanan</a></li>
+                                <li><a href="{{URL('komentar')}}">Semua Komentar</a></li>
+                                <li><a href="{{URL('komentar/create')}}">Buat Komentar</a></li>
                             </ul>
                         </li>
-                        <li class="{{{(Request::is('pelanggan/hidangan') ? 'active' : '')}}}"> <a href="{{URL('pelanggan/hidangan')}}" aria-expanded="false"><i class="fa fa-fire"></i>Hidangan </a></li>
+                        <li class="{{{(Request::is('hidangans') ? 'active' : '')}}}"> <a href="{{URL('hidangans')}}" aria-expanded="false"><i class="fa fa-fire"></i>Hidangan </a></li>
                         {{-- <li class="{{{(Request::is('pelanggan/pengaturan') ? 'active' : '')}}}"> <a href="{{URL('pelanggan/pengaturan')}}" aria-expanded="false"><i class="fa fa-user"></i>Profil </a></li> --}}
                     </ul>
                 </nav>
@@ -198,6 +199,7 @@
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('ela/js/lib/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('ela/js/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{ asset('ela/js/jquery.slimscroll.js') }}"></script>
     <!--Menu sidebar -->
@@ -206,6 +208,7 @@
     <script src="{{ asset('ela/js/lib/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('ela/js/custom.min.js') }}"></script>
+    @stack('js')
 
 </body>
 

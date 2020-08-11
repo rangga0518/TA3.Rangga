@@ -11,15 +11,17 @@ use App\User;
 class PegawaiController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
     public function index(){
+        $pesanan = Pemesanan::all();
+        $reservasi = Reservasi::all();
         $dashboard = [
-            'jumlah_pelanggan' => User::count(),
+            'jumlah_pelanggan' => User::where('role','user')->count(),
             'jumlah_pesanan' => Pemesanan::count(),
             'jumlah_reservasi' => Reservasi::count(),
             'jumlah_hidangan' => Hidangan::count(),
         ];
-        return view('pegawai.index', compact('dashboard'));
+        return view('pegawai.index', compact('dashboard','pesanan','reservasi'));
     }
 }

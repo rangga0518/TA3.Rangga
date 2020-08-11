@@ -12,4 +12,8 @@ class Hidangan extends Model
     public function detail_pemesanan(){
         return $this->hasMany(Detail_pemesanan::class, 'id_hidangan', 'id');
     }
+    public function pemesanan(){
+        return $this->hasMany(Pemesanan::class, 'id_pemesanan', 'id');
+    }
+
 }

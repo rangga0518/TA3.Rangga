@@ -18,50 +18,50 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="makanan" role="tabpanel">
                                 <div class="row">
-                                {{-- @foreach($makanan as $makanan)
+                                @foreach($makanan as $makanan)
                                 <div class="col-md-3">
                                     <div class="card">
-                                      <img class="card-img-top" src="{{ asset('images/hidangan/'.$makanan->foto_hidangan) }}">
+                                      <img class="card-img-top" src="{{ Storage::url($makanan->foto_hidangan) }} ">
                                       <div class="card-body">
                                         <h4 class="card-title">{{$makanan->nama_hidangan}}</h4>
                                         <p class="card-text">Rp {{$makanan->harga_hidangan}}</p>
                                         <div class="row">
-                                            <a href="{{URL('hidangan/'.$makanan->id.'/edit')}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{URL('hidangan/'.$makanan->id.'/edit')}}" class="btn btn-primary m-1"><i class="fa fa-pencil"></i></a>
                                             
                                             <form action="{{URL('hidangan/'.$makanan->id)}}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE')}}
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger m-1"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </div>
                                       </div>
                                     </div>
                                 </div>
-                                @endforeach --}}
+                                @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane" id="minuman" role="tabpanel">
                                 <div class="row">
-                                {{-- @foreach($minuman as $minuman)
+                                @foreach($minuman as $minuman)
                                 <div class="col-md-3">
                                     <div class="card">
-                                      <img class="card-img-top" src="{{ asset('images/hidangan/'.$minuman->foto_hidangan) }}">
+                                      <img class="card-img-top" src="{{ Storage::url($minuman->foto_hidangan) }} ">
                                       <div class="card-body">
                                         <h4 class="card-title">{{$minuman->nama_hidangan}}</h4>
                                         <p class="card-text">Rp {{$minuman->harga_hidangan}}</p>
                                         <div class="row">
-                                            <a href="{{URL('hidangan/'.$minuman->id.'/edit')}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{URL('hidangan/'.$minuman->id.'/edit')}}" class="btn btn-primary m-1"><i class="fa fa-pencil"></i></a>
 
                                             <form action="{{URL('hidangan/'.$minuman->id)}}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE')}}
-                                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger m-1"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </div>
                                       </div>
                                     </div>
                                 </div>
-                                @endforeach --}}
+                                @endforeach
                                 </div>
                             </div>
                         </div>

@@ -8,7 +8,7 @@
                 <div class="col-lg-8">
                     <div class="card" style="background: #f5f5f5">
                             <div class="basic-form">
-                                <form method="POST" action="{{ URL('reservasi') }}">
+                                <form method="POST" action="{{ route('reservasi.store') }}">
                                     {{ csrf_field() }}
 
 
@@ -16,41 +16,32 @@
                                         <label for="" class="col-sm-2 col-form-label">Restoran</label>
                                         <div class="col-sm-10">
                                             <select name="id_restoran" class="form-control">
-                                                {{-- @foreach($restoran as $restoran)
+                                                @foreach($restoran as $restoran)
                                                 <option value="{{$restoran->id_restoran}}">{{$restoran->nama_restoran.' - '.$restoran->alamat_restoran}}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <label for="" class="col-sm-2 col-form-label">Nama Pelanggan</label>
                                         <div class="col-sm-10">
-                                            <select name="id_pelanggan" class="form-control">
-                                                {{-- @foreach($pelanggan as $pelanggan)
-                                                <option value="{{$pelanggan->id_pelanggan}}">{{$pelanggan->nama_pelanggan}}</option>
-                                                @endforeach --}}
+                                            <select name="id_user" class="form-control">
+                                                @foreach($pelanggan as $pelanggan)
+                                                <option value="{{$pelanggan->id_user}}">{{$pelanggan->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Nama Pegawai</label>
-                                        <div class="col-sm-10">
-                                            <select name="id_pegawai" class="form-control">
-                                                {{-- @foreach($pegawais as $pegawais)
-                                                <option value="{{$pegawais->id_pegawai}}">{{$pegawais->nama_pegawai}}</option>
-                                                @endforeach --}}
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="form-group row">
                                         <label for="no_meja_reservasi" class="col-sm-2 col-form-label">Nomor Meja</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="no_meja_reservasi" name="no_meja_reservasi">
+                                            <input type="text" name="no_meja_reservasi" id="no_meja_reservasi" class="form-control @error('no_meja_reservasi') is-invalid @enderror"  autocomplete="off" value="{{ old('no_meja_reservasi') }}">
+                                            @error('no_meja_reservasi')
+                                                {{ $message }}
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Reservasi;
 use App\Restoran;
+use App\User;
 
 class PegawaiReservasiController extends Controller
 {
+    public function __construct(){
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +30,9 @@ class PegawaiReservasiController extends Controller
      */
     public function create()
     {
-        return view('pegawai.reservasi.create');
+        $pelanggan = User::all();
+        $restoran = Restoran::all();
+        return view('pegawai.reservasi.create',compact('pelanggan','restoran'));
     }
 
     /**
@@ -37,7 +43,19 @@ class PegawaiReservasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateDate = $request->validate([
+            'id_restoran' => 'required',
+            'no_meja_reservasi' => 'required',
+            'status_reservasi' => 'required'
+            
+            ]);
+            Reservasi::create([
+                'id_restoran' => $validateDate['id_restoran'],
+                'id_user' => Auth::user()->id,
+                'no_meja_reservasi' => $validateDate['no_meja_reservasi'],
+                'status_reservasi' => $validateDate['status_reservasi']
+            ]);
+            return redirect()->route('reservasi.index');
     }
 
     /**
@@ -59,7 +77,9 @@ class PegawaiReservasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reservasi = Reservasi::where('id', $id)->get();
+        $restoran = Restoran::all();
+        return view('pegawai.reservasi.edit', compact('restoran','reservasi'));
     }
 
     /**
@@ -71,7 +91,15 @@ class PegawaiReservasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [
+            'id_restoran' => $request->id_restoran,
+            // 'id_user' => $request->id_user,
+            'no_meja_reservasi' =>$request->no_meja_reservasi,
+            'status_reservasi' => $request->status_reservasi,
+            'updated_at' => date("Y-m-d H:i:s")
+        ];
+        Reservasi::where('id', $id)->update($data);
+        return redirect()->route('reservasi.index');
     }
 
     /**
@@ -80,8 +108,9 @@ class PegawaiReservasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reservasi $reservasi)
     {
-        //
+        $reservasi->delete();
+        return redirect()->route('reservasi.index');
     }
 }

@@ -19,7 +19,7 @@
                         @foreach($makanan as $makanan)
                         <div class="col-md-3">
                             <div class="card">
-                              <img class="card-img-top" src="{{ asset('images/hidangan/'.$makanan->foto_hidangan) }}">
+                              <img class="card-img-top" src="{{Storage::url($makanan->foto_hidangan)}}" alt="{{$makanan->nama_hidangan}}">
                               <div class="card-body">
                                 <h4 class="card-title">{{$makanan->nama_hidangan}}</h4>
                                 <p class="card-text">Rp {{$makanan->harga_hidangan}}</p>
@@ -34,7 +34,7 @@
                         @foreach($minuman as $minuman)
                         <div class="col-md-3">
                             <div class="card">
-                              <img class="card-img-top" src="{{ asset('images/hidangan/'.$minuman->foto_hidangan) }}">
+                              <img class="card-img-top" src="{{Storage::url($minuman->foto_hidangan)}}" alt="{{$minuman->nama_hidangan}}">
                               <div class="card-body">
                                 <h4 class="card-title">{{$minuman->nama_hidangan}}</h4>
                                 <p class="card-text">Rp {{$minuman->harga_hidangan}}</p>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="{{ URL('pelanggan/pemesanan/create')}}">Pesan Sekarang!</a>
+                {{-- <a class="btn btn-primary" href="{{ URL('pemesanans/create')}}">Pesan Sekarang!</a> --}}
             </div>
         </div>
 @endsection

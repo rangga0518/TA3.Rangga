@@ -2,8 +2,6 @@
 
 @section('title', 'Dashboard')
 
-
-
 @section('content')
                 <div class="row">
                     <link href=" {{ asset('ela/css/lib/sweetalert/sweetalert.css') }}" rel="stylesheet">
@@ -14,8 +12,8 @@
                                     <span><i class="fa fa-user f-s-40 color-danger"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    {{-- <a href="{{URL('pelanggan/reservasi')}}"><h2 style="color: #5e493a">{{$jumlah_kunjungan}}</h2></a> --}}
-                                    <p class="m-b-0">Jumlah Berkunjung</p>
+                                    <a href="{{URL('pelanggan/reservasi')}}"><h2 style="color: #5e493a">{{$dashboard['jumlah_pemesanan']}}</h2></a>
+                                    <p class="m-b-0">Jumlah Pemesanan</p>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +25,7 @@
                                     <span><i class="fa fa-shopping-cart f-s-40 color-success"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    {{-- <a href="{{URL('pelanggan/pemesanan')}}"><h2 style="color: #5e493a">{{$pemesanan_terakhir}}</h2></a> --}}
+                                    <a href="{{URL('pelanggan/pemesanan')}}"><h2 style="color: #5e493a">{{$dashboard['pemesanan_terakhir']}}</h2></a>
                                     <p class="m-b-0">Pemesanan Terakhir</p>
                                 </div>
                             </div>
@@ -40,7 +38,7 @@
                                     <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
                                 </div>
                                 <div class="media-body media-text-right">
-                                    {{-- <a href="{{URL('pelanggan/pemesanan')}}"><h2 style="color: #5e493a">{{$total_pemesanan}}</h2></a> --}}
+                                    {{-- <a href="{{URL('pelanggan/pemesanan')}}"><h2 style="color: #5e493a">{{$jumlah_pesanan}}</h2></a> --}}
                                     <p class="m-b-0">Total Pemesanan</p>
                                 </div>
                             </div>
